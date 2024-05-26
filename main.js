@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
 
+
 const createWindow = () => {
   const win = new BrowserWindow({
     transparent: true,
@@ -10,7 +11,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'js/preload.js')
     }
   })
-
+  win.webContents.openDevTools();
   win.loadFile('index.html')
 }
 
@@ -20,7 +21,7 @@ app.whenReady().then(() => {
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
-  
+
     }
   })
 })

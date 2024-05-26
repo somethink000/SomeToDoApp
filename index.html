@@ -7,31 +7,40 @@
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
     <title>Hello from Electron renderer!</title>
     
-    <link rel="stylesheet" href="style/style.css">
+    <!-- <link rel="stylesheet" href="style/style.css"> -->
+    <link rel="stylesheet" href="style/tido.css">
+    <script src="./js/LoadTodo.js" defer></script>
+    <!-- <script src="./js/JsonStorage.js"></script> -->
   </head>
 
   <body class="body blur">
         
     
-    <div class="container">
-
-        <div class="about_box"> 
-
-            <img class="circle-image" src="/assets/myface.jpg"/>
-            <h1 class="title">Some</h1>
-            <h1 class="txt">Just another creator who love make things</h1>
-            <p id="info"></p>
-          
-            
+    <section class="todo">
+      <h2>To-do list</h2>
+      <div class="input">
+        <input
+          type="text"
+          class="input-field"
+          id="todoInput"
+          placeholder="Add a new todo"
+        />
+        <button class="btn">Add</button>
+      </div>
+      <ul class="scroll">
+        <li id="todoList"></li>
+      </ul>
+      <div>
+        <hr class="counter" />
+        <div class="counter-container">
+          <p><span id="todoCount">0</span> items total</p>
+          <button id="deleteButton">Delete All</button>
         </div>
-    </div>
+      </div>
+    </section>
+
    
   </body> 
   
-  <script src="./js/LoadTodo.js"> 
-
-        
-        
-        
-  </script>
+ 
 </html>
