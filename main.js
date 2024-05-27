@@ -1,3 +1,4 @@
+const { ipcMain } = require('electron')
 const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
 
@@ -13,8 +14,42 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-  win.webContents.openDevTools();
+
   win.loadFile('./view/index.html')
+  win.webContents.openDevTools();
+
+  ipcMain.handle('ctrls', (e, btn) => {
+    let res = { class: btn, btn: null};
+    if (btn === 'close-btn') 
+    {
+        win.close();
+    }
+    // if (btn === 'min-btn') 
+    // {
+    //     win.minimize();
+    // } else if (btn === 'max-btn') 
+    // {
+    //     if (!win.isMaximized()) {
+    //       win.maximize();
+    //       res.btn = 'MAX';
+    //     } else {
+    //       win.unmaximize();
+    //       res.btn = 'UNMAX';
+    //     }
+    // } else if (btn === 'close-btn') 
+    // {
+    //     win.close();
+    // }else if (btn === 'resize') 
+    // {
+    //     if (win.isMaximized()) {
+    //       win.maximize();
+    //       res.btn = 'MAX';
+    //     } else {
+    //       win.unmaximize();
+    //       res.btn = 'UNMAX';
+    //     }
+    // }
+  });
 }
 
 app.whenReady().then(() => {
