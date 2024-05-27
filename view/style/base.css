@@ -1,0 +1,39 @@
+
+
+.bl-box {
+	background-color: rgb(50, 50, 50);
+}
+.wh-box {
+	background-color: rgb(255, 255, 255);
+}
+
+.container {
+	flex-direction: column;
+	width: 90%;
+}
+
+.baseline {
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.baseline_line{
+	width: 85%;
+	height: 1px;
+	background-color: rgb(50, 50, 50);
+}
+
+.title {
+	padding: 6px;
+	font-size: 28px;
+	font-weight: 200;
+	text-shadow: 2px 1px 4px white;
+}
+
+.txt {
+	padding: 5px;
+	font-size: 18px;
+	font-weight: 200;
+	/* text-shadow: 0px 1px 1px white; */
+}

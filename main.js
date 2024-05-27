@@ -7,12 +7,14 @@ const createWindow = () => {
     transparent: true,
     width: 800,
     height: 600,
+    title: 'Nofw',
+    frame: false,
     webPreferences: {
-      preload: path.join(__dirname, 'js/preload.js')
+      preload: path.join(__dirname, 'preload.js')
     }
   })
   win.webContents.openDevTools();
-  win.loadFile('index.html')
+  win.loadFile('./view/index.html')
 }
 
 app.whenReady().then(() => {

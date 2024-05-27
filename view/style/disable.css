@@ -21,12 +21,25 @@ time, mark, audio, video {
 	color: white;
 	vertical-align: baseline;
     display: flex;
+
 }
-html {
-	height: 100%;
-	
-}
+
 body {
+	justify-content: center;
+	width: 100%;
+	min-height: 100vh;
+	
+
+	/* margin: 0; */
+	/* background: url(/../assets/dark.jpg); */
+	/* background-image: radial-gradient(#00000000, #ffffff00); */
+	background-color: rgb(0, 0, 0);
+	/* background-size: 100%; 
+	background-repeat: repeat-y; */
+    /* backdrop-filter: blur(10px); */
+	/* justify-content: center; */
+
+
 	line-height: 1;
 }
 ol, ul {
