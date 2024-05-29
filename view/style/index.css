@@ -16,7 +16,7 @@
 }
 
 
-.tasks-place {
+.tasks_place {
     /* width: 70%; */
     flex-direction: row;
     flex-wrap: wrap;
@@ -42,6 +42,15 @@
     padding: 8px;
     margin-top: 12px;
     
+}
+
+.taskcomplete{
+    background-color: rgb(20, 20, 20);
+    color: rgb(100, 100, 100);
+    
+    .txt{
+        color: rgb(100, 100, 100);
+    }
 }
 
 

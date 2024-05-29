@@ -2,15 +2,24 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
-     -->
+   
     <link rel="stylesheet" href="./style/style.css">
+    <script src="./tasks.js" defer></script>
+    <script src="./task_boxes.js" defer></script>
     <script src="./index.js" defer></script>
+    
   </head>
   
  
+  <!-- <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+    <img src="img_w3slogo.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+  </div>
+  
+  <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" width="88" height="31"></div>
+   -->
+
+
+
   <body class="blur">
     <div class="container">
       <div class="head-ctrl-box">
@@ -21,6 +30,11 @@
             <img class="head_image btn close-btn" src="./assets/close.png"/>
           </div> -->
           <div>
+            <button class="add_button bl-box main-border">
+              <img class="head_image" src="./assets/plus.png" width="32"/>
+              <p class="txt">New task</p>
+            </button>
+
             <button class="add_button bl-box main-border">
               <img class="head_image" src="./assets/plus.png" width="32"/>
               <p class="txt">Add task block</p>
@@ -36,47 +50,36 @@
 
           <div class="current-tasks">
 
-            <div class="current-task-block bl-box main-border">
+            <div id="current-task-block" class="current-task-block bl-box main-border" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- Title -->
               <div class="task-block-name">
+
                 <p class="title">Today</p>
-                <img class="circle_image_button" src="./assets/plus.png" width="32"/>
+                
+                <!-- <form class="task_form main-border" onsubmit="createForceTask(event)"> -->
+                <div class="task_form main-border">
+                  <input class="task_input" type="text" id="forceTask"  placeholder="New task">
+                </div>
+                <!-- </form>  -->
+
               </div>
 
               <div class="baseline"><div class="baseline_line"></div></div>
               
               <!-- Input -->
-              <!-- <form class="task_form main-border">
-                <input class="task_input" type="text" id="fname" name="fname" placeholder="New task"><br>
-                <img class="circle_image_button" type="submit" src="./assets/check.png" width="26"/>
-              </form>  -->
               
-              <!-- Task -->
-              <div class="task main-border">
-                <p class="txt">cmon man do these thinks and go away no one cares about you</p>
-                <img class="circle_image_button" src="./assets/check.png" width="26"/>
-              </div>
-
+              
+            
+              
               
             </div>
 
           </div>
           
 
-          <div class="tasks-place">
+          <div id="tasks_place" class="tasks_place">
+
             
-              <div class="task-block bl-box main-border">
-                  <div class="task-block-name">
-                    <p class="title">Today</p>
-                    <img class="circle_image_button" src="./assets/plus.png" width="32"/>
-                  </div>
-                  <div class="baseline"><div class="baseline_line"></div></div>
-                  <div class="task main-border">сделать катлету</div>
-                  <div class="task main-border">сделать катлету</div>
-                  <div class="task main-border">сделать катлетусделать катлетусделать катлету</div>
-                  <div class="task main-border">сделать катлету</div>
-                  <div class="task main-border">сделать катлетусделать катлету</div>
-              </div>
   
           </div>
 

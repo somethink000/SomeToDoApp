@@ -3,9 +3,9 @@
 .task_form {
     justify-content: space-between;
     align-items: center;
-    border-radius: 10px;
-    margin: 6px;
-    padding: 4px;
+    border-radius: 20px;
+    padding: 8px;
+    margin-top: 12px;
 }
 
 .task_input {
@@ -13,7 +13,7 @@
     height: 100%;
     font-size: 16px;
     border: none;
-    border-bottom: 1px solid rgb(100, 100, 100);
+    /* border-bottom: 1px solid rgb(100, 100, 100); */
     color: aliceblue;
     height: 16px;
     background-color: rgba(0, 0, 0, 0);
