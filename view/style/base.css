@@ -7,6 +7,7 @@
 	background-color: rgb(255, 255, 255);
 }
 
+
 .container {
 	flex-direction: column;
 	width: 90%;
@@ -19,9 +20,19 @@
 }
 
 .baseline_line{
-	width: 85%;
+	width: 95%;
 	height: 1px;
-	background-color: rgb(50, 50, 50);
+	background-color: rgb(100, 100, 100);
+}
+
+.main-border{
+	border: 1px solid rgb(100, 100, 100);
+}
+
+.main-block {
+	flex-direction: column;
+	width: 100%;
+	margin-top: 20px;
 }
 
 .title {

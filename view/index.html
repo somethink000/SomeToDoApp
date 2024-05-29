@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
-    <title>Hello from Electron renderer!</title>
-    
+     -->
     <link rel="stylesheet" href="./style/style.css">
     <script src="./index.js" defer></script>
   </head>
@@ -16,15 +15,75 @@
     <div class="container">
       <div class="head-ctrl-box">
           <h1 class="title">TaskToDo</h1>
-          <div class="">
+          <!-- <div class="">
             <img class="head_image" src="./assets/hide.png"/>
-            <img class="head_image" src="./assets/resize.png"/>
+
             <img class="head_image btn close-btn" src="./assets/close.png"/>
+          </div> -->
+          <div>
+            <button class="add_button bl-box main-border">
+              <img class="head_image" src="./assets/plus.png" width="32"/>
+              <p class="txt">Add task block</p>
+            </button>
           </div>
       </div>
+
       <div class="baseline"><div class="baseline_line"></div></div>
 
-      <h1 class="txt">swad</h1>
+      <div class="main-block">
+        <div class="tasks-main">
+
+
+          <div class="current-tasks">
+
+            <div class="current-task-block bl-box main-border">
+              <!-- Title -->
+              <div class="task-block-name">
+                <p class="title">Today</p>
+                <img class="circle_image_button" src="./assets/plus.png" width="32"/>
+              </div>
+
+              <div class="baseline"><div class="baseline_line"></div></div>
+              
+              <!-- Input -->
+              <!-- <form class="task_form main-border">
+                <input class="task_input" type="text" id="fname" name="fname" placeholder="New task"><br>
+                <img class="circle_image_button" type="submit" src="./assets/check.png" width="26"/>
+              </form>  -->
+              
+              <!-- Task -->
+              <div class="task main-border">
+                <p class="txt">cmon man do these thinks and go away no one cares about you</p>
+                <img class="circle_image_button" src="./assets/check.png" width="26"/>
+              </div>
+
+              
+            </div>
+
+          </div>
+          
+
+          <div class="tasks-place">
+            
+              <div class="task-block bl-box main-border">
+                  <div class="task-block-name">
+                    <p class="title">Today</p>
+                    <img class="circle_image_button" src="./assets/plus.png" width="32"/>
+                  </div>
+                  <div class="baseline"><div class="baseline_line"></div></div>
+                  <div class="task main-border">сделать катлету</div>
+                  <div class="task main-border">сделать катлету</div>
+                  <div class="task main-border">сделать катлетусделать катлетусделать катлету</div>
+                  <div class="task main-border">сделать катлету</div>
+                  <div class="task main-border">сделать катлетусделать катлету</div>
+              </div>
+  
+          </div>
+
+
+        </div>
+      </div>
+      
     </div>
   </body> 
   

@@ -5,7 +5,7 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
+b, u, i, center, button,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -28,15 +28,17 @@ body {
 	justify-content: center;
 	width: 100%;
 	min-height: 100vh;
-	
+	/* border-radius: 20px; */
 
 	/* margin: 0; */
 	/* background: url(/../assets/dark.jpg); */
 	/* background-image: radial-gradient(#00000000, #ffffff00); */
-	background-color: rgb(0, 0, 0);
-	/* background-size: 100%; 
-	background-repeat: repeat-y; */
+
+	background-color: rgba(20, 20, 20, 0.7);
+	background-size: 100%; 
+	background-repeat: repeat-y;
     /* backdrop-filter: blur(10px); */
+
 	/* justify-content: center; */
 
 

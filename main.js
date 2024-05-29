@@ -6,10 +6,12 @@ const path = require('node:path')
 const createWindow = () => {
   const win = new BrowserWindow({
     transparent: true,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     title: 'Nofw',
-    frame: false,
+    // frame: false,
+    vibrancy: 'fullscreen-ui',   
+    backgroundMaterial: 'acrylic',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }

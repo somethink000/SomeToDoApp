@@ -1,0 +1,48 @@
+
+.tasks-main {
+    width: 100%;
+    flex-direction: row;     
+}
+
+.current-tasks {
+    width: 400px;
+}
+.current-task-block {
+    flex-direction: column;
+    border-radius: 10px;
+    /* margin-top: 30px; */
+    padding: 12px;
+    width: 400px;
+}
+
+
+.tasks-place {
+    /* width: 70%; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px;
+}
+
+.task-block {
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 12px;
+    padding: 12px;
+    width: 380px;
+}
+.task-block-name {
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+.task{
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 8px;
+    margin-top: 12px;
+    
+}
+
+
+

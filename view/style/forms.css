@@ -1,0 +1,20 @@
+
+
+.task_form {
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin: 6px;
+    padding: 4px;
+}
+
+.task_input {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid rgb(100, 100, 100);
+    color: aliceblue;
+    height: 16px;
+    background-color: rgba(0, 0, 0, 0);
+}
