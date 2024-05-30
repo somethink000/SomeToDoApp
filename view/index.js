@@ -48,7 +48,7 @@ input.addEventListener("keypress", function(event) {
     
     event.preventDefault();
     
-    createNewTask(input.value, true, null)
+    createNewTask(input.value, true, 0)
     input.value = "";
   }
 });

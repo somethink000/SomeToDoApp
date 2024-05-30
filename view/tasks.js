@@ -1,14 +1,14 @@
 
 
-function addTaskBox(taskbox, index) {
-
+function addTaskBox(taskbox) {
+    
     let div = document.createElement('div');
     div.setAttribute('class', 'task-block bl-box main-border');
     div.setAttribute('ondrop', "drop(event)");
     div.setAttribute('ondragover', "allowDrop(event)");
     div.setAttribute('draggable', "true");
     div.setAttribute('ondragstart', "drag(event)");
-    div.setAttribute('id', "taskbox"+index);
+    div.setAttribute('id', "taskbox"+taskbox.id);
     div.innerHTML = `
         <div class="task-block-name">
             <p class="title">${taskbox.title}</p>
@@ -20,20 +20,14 @@ function addTaskBox(taskbox, index) {
 
     tasks_place.append(div);
 
-
-    taskbox.tasks.forEach((taskdata, index) => {
-
-        addTask(taskdata, index, div);
-    });
-
 }
 
-function addTask(taskdata, index, taskbox) {
+function addTask(taskdata, boxid) {
     let task = document.createElement('div');
     task.setAttribute('class', "task main-border");
     task.setAttribute('draggable', "true");
     task.setAttribute('ondragstart', "drag(event)");
-    task.setAttribute('id', index);
+    task.setAttribute('id', taskdata.id);
     // task.addEventListener("click", checkTask);
     task.innerHTML = `
         <p class="txt">${taskdata.text}</p>
@@ -48,7 +42,7 @@ function addTask(taskdata, index, taskbox) {
     if (taskdata.current) {
         document.getElementById("current-task-block").append(task);
     } else {
-        taskbox.append(task);
+        document.getElementById("taskbox"+boxid).append(task);
     }
 }
 
@@ -79,8 +73,24 @@ function checkTask(event){
 
 function createNewTask(title, curr, box){
 
+    globalThis.tasksDataController.createTask( title, curr, box ).then((response) => {
+
+        // let boxToAttach = document.getElementById("taskbox"+box);
+        // if (box == 0) boxToAttach = document.getElementById("");
+
+        globalThis.tasksDataController.getLastTask( ).then((response) => {
+
+        }); 
+            
+        // getTask
+        // addTask(takdata, box);
+        
+    }); 
+
+    // window.tasksDataController.createTask();
+
+
+    // var takdata = taskboxes[0].tasks.push({done: false, current: curr, boxid: 0, text: title});
+    // console.log(taskboxes[0].tasks[takdata - 1]);
     
-    var takdata = taskboxes[0].tasks.push({done: false, current: curr, boxid: 0, text: title});
-    console.log(taskboxes[0].tasks[takdata - 1]);
-    addTask(taskboxes[0].tasks[takdata - 1], takdata, document.getElementById("taskbox"+0))
 }

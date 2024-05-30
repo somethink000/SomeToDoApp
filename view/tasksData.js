@@ -2,18 +2,18 @@
 
 
 async function loadPage() {
-    const taskBoxes = await window.tasksDataController.taskBoxes();
-    
-    const tasks_place = document.getElementById('tasks_place')
 
+    const tasks_place = document.getElementById('tasks_place')
+    const taskBoxes = await window.tasksDataController.taskBoxes();
     taskBoxes.forEach((taskbox) => {
-        // addTaskBox(taskbox, index);
-        console.log(taskbox);
+        addTaskBox(taskbox);
     });
 
-
     const tasks = await window.tasksDataController.tasks();
-
+    tasks.forEach((taskdata) => {
+        addTask(taskdata, taskdata.taskBoxId)
+    });
+   
 }
 
 loadPage()
