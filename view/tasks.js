@@ -1,14 +1,60 @@
-var tasks = [
-    {done: false, current: false, boxid: 0, text: 'сделать те самые штуки'},
-    {done: false, current: false, boxid: 1, text: 'сделать те самые штуки и те ещё и те'},
-    {done: false, current: false, boxid: 0, text: 'приготовить плоф'},
-    {done: false, current: true, boxid: 0, text: 'покушоть'},
-    {done: true, current: false, boxid: 0, text: 'скибиди доп доп '},
-];
+
+// var taskboxes = [
+//     {
+//         title : 'fps',
+//         tasks : [
+//             {done: false, current: false, text: 'сделать те самые штуки'},
+//             {done: false, current: false, text: 'сделать те самые штуки и те ещё и те'},
+//         ]
+
+//     },
+//     {
+//         title : 'tommorow',
+//         tasks : [
+//             {done: false, current: false, text: 'приготовить плоф'},
+//             {done: false, current: true, text: 'покушоть'},
+//         ]
+//     },
+//     {
+//         title : 'Todo',
+//         tasks : [
+//             {done: true, current: false, text: 'скибиди доп доп '},
+//         ]
+        
+//     },
+// ];
 
 
-function addTask(taskdata, index){
 
+function addTaskBox(taskbox, index) {
+
+    let div = document.createElement('div');
+    div.setAttribute('class', 'task-block bl-box main-border');
+    div.setAttribute('ondrop', "drop(event)");
+    div.setAttribute('ondragover', "allowDrop(event)");
+    div.setAttribute('draggable', "true");
+    div.setAttribute('ondragstart', "drag(event)");
+    div.setAttribute('id', "taskbox"+index);
+    div.innerHTML = `
+        <div class="task-block-name">
+            <p class="title">${taskbox.title}</p>
+        </div>
+
+        <div class="baseline"><div class="baseline_line"></div></div>
+    `;
+    
+
+    tasks_place.append(div);
+
+
+    taskbox.tasks.forEach((taskdata, index) => {
+
+        addTask(taskdata, index, div);
+    });
+
+}
+
+function addTask(taskdata, index, taskbox) {
     let task = document.createElement('div');
     task.setAttribute('class', "task main-border");
     task.setAttribute('draggable', "true");
@@ -28,9 +74,10 @@ function addTask(taskdata, index){
     if (taskdata.current) {
         document.getElementById("current-task-block").append(task);
     } else {
-        document.getElementById("taskbox"+taskdata.boxid).append(task);
+        taskbox.append(task);
     }
 }
+
 
 function checkTask(event){
     let parentTask = event.target.parentNode
@@ -57,6 +104,8 @@ function checkTask(event){
 
 function createNewTask(title, curr, box){
 
-    tasks.push({done: true, current: curr, boxid: box, text: title});
-    addTask(taskdata, index)
+    
+    var takdata = taskboxes[0].tasks.push({done: false, current: curr, boxid: 0, text: title});
+    console.log(taskboxes[0].tasks[takdata - 1]);
+    addTask(taskboxes[0].tasks[takdata - 1], takdata, document.getElementById("taskbox"+0))
 }

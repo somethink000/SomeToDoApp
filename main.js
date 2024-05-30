@@ -20,37 +20,44 @@ const createWindow = () => {
   win.loadFile('./view/index.html')
   win.webContents.openDevTools();
 
-  ipcMain.handle('ctrls', (e, btn) => {
-    let res = { class: btn, btn: null};
-    if (btn === 'close-btn') 
-    {
-        win.close();
-    }
-    // if (btn === 'min-btn') 
-    // {
-    //     win.minimize();
-    // } else if (btn === 'max-btn') 
-    // {
-    //     if (!win.isMaximized()) {
-    //       win.maximize();
-    //       res.btn = 'MAX';
-    //     } else {
-    //       win.unmaximize();
-    //       res.btn = 'UNMAX';
-    //     }
-    // } else if (btn === 'close-btn') 
-    // {
-    //     win.close();
-    // }else if (btn === 'resize') 
-    // {
-    //     if (win.isMaximized()) {
-    //       win.maximize();
-    //       res.btn = 'MAX';
-    //     } else {
-    //       win.unmaximize();
-    //       res.btn = 'UNMAX';
-    //     }
-    // }
+  ipcMain.handle('load_data', (e) => {
+
+    var tasksData;
+    const fs = require('fs');
+    const filePath = ("./data/tasksData.json");
+    
+    try {
+
+      if (fs.existsSync( filePath )) {
+        tasksData = require(filePath);
+      
+      } else {
+
+        tasksData = [
+            {
+                title : 'TaskToDo',
+                tasks : [
+                    {done: false, current: true, text: 'Setup my tusks'},
+                    {done: false, current: false, text: 'Proud of yourself'},
+                    {done: true, current: false, text: 'Install TuskToDo '},
+                ]
+        
+            },
+        ];
+    
+        var dictstring = JSON.stringify(tasksData);
+
+        fs.writeFile( filePath, dictstring, function(err, result) {
+            if(err) console.log('error', err);
+        });
+        
+      }
+
+    } catch(err) { console.log(err); }
+
+
+    return tasksData;  
+  
   });
 }
 

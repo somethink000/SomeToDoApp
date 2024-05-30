@@ -1,7 +1,9 @@
 
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('ctrls', {
-  wctrl: (btn) => ipcRenderer.invoke( 'ctrls', btn )
+
+
+contextBridge.exposeInMainWorld('tasksDataController', {
+  getTasksData: () => ipcRenderer.invoke( 'load_data' ),
 })
 
