@@ -4,7 +4,10 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 
 contextBridge.exposeInMainWorld('tasksDataController', {
-  get: () => ipcRenderer.invoke( 'load_data' ),
-  update: (newTasksData) => ipcRenderer.invoke( 'data_sync', newTasksData),
-})
 
+  taskBoxes: () => ipcRenderer.invoke('db-query', "SELECT * FROM tasksBoxes"),
+
+  tasks: () => ipcRenderer.invoke('db-query', "SELECT * FROM tasks"),
+
+
+})

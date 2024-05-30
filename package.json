@@ -10,7 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bootstrap": "^3.4.1",
-    "electron": "^30.0.8"
+    "@electron/rebuild": "^3.6.0",
+    "electron": "^30.0.8",
+    "sqlite3": "^5.1.7"
   }
 }

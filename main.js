@@ -2,6 +2,8 @@ const { ipcMain } = require('electron')
 const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
 
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database('./data/file.db');
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -10,7 +12,7 @@ const createWindow = () => {
     height: 800,
     title: 'Nofw',
     // frame: false,
-    vibrancy: 'fullscreen-ui',   
+    vibrancy: 'fullscreen-ui',
     backgroundMaterial: 'acrylic',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -20,54 +22,35 @@ const createWindow = () => {
   win.loadFile('./view/index.html')
   win.webContents.openDevTools();
 
-  ipcMain.handle('load_data', (e) => {
-
-    var tasksData;
-    const fs = require('fs');
-    const filePath = ("./data/tasksData.json");
-    
-    try {
-
-      if (fs.existsSync( filePath )) {
-        // tasksData = require(filePath);
-        const data = fs.readFileSync(filePath);
-        tasksData = JSON.parse(data);
-      } else {
-
-        tasksData = [
-            {
-                title : 'TaskToDo',
-                tasks : [
-                    {done: false, current: true, text: 'Setup my tusks'},
-                    {done: false, current: false, text: 'Proud of yourself'},
-                    {done: true, current: false, text: 'Install TuskToDo '},
-                ]
-        
-            },
-        ];
-    
-        var dictstring = JSON.stringify(tasksData);
-
-        fs.writeFile( filePath, dictstring, function(err, result) {
-            if(err) console.log('error', err);
-        });
-        
-      }
-
-    } catch(err) { console.log(err); }
-
-
-    return tasksData;  
   
+  db.serialize(() => {
+   
+    db.run(`CREATE TABLE tasksBoxes (
+      id INTEGER PRIMARY KEY,
+      title TEXT NOT NULL
+    )`);
+
+    db.run(`CREATE TABLE tasks (
+      id INTEGER PRIMARY KEY,
+      text TEXT NOT NULL,
+      done BIT NOT NULL,
+      current BIT NOT NULL,
+      taskBoxId INT NOT NULL
+    )`);
+   
+    db.run("INSERT INTO tasksBoxes (title) VALUES ('TaskToDo')");
+    db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Setup my tusks', false, true, 0)");
+    db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Proud of yourself', false, false, 0)");
+    db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Install TuskToDo', true, false, 0)");
+    
   });
 
-
-  ipcMain.handle('data_sync', (e, mewdata) => {
-
-    const fs = require('fs');
-    const filePath = ("./data/tasksData.json");
-    fs.writeFileSync(filePath, JSON.stringify(mewdata));
-  
+  ipcMain.handle('db-query', async (event, sqlQuery) => {
+    return new Promise(res => {
+        db.all(sqlQuery, (err, rows) => {
+          res(rows);
+        });
+    });
   });
 
 }

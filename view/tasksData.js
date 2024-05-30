@@ -1,26 +1,29 @@
 
 
 
-const func = async () => {
-    const response = await window.tasksDataController.get();
-    console.log(response) // prints out 'pong'
-
-    var taskboxes = response;
+async function loadPage() {
+    const taskBoxes = await window.tasksDataController.taskBoxes();
+    
     const tasks_place = document.getElementById('tasks_place')
 
-    taskboxes.forEach((taskbox, index) => {
-        addTaskBox(taskbox, index);
+    taskBoxes.forEach((taskbox) => {
+        // addTaskBox(taskbox, index);
+        console.log(taskbox);
     });
+
+
+    const tasks = await window.tasksDataController.tasks();
+
 }
 
-func()
+loadPage()
 
 
-function updateData() {
+// function updateData() {
     
-    globalThis.tasksDataController.update(taskboxes).then(() => {
+//     globalThis.tasksDataController.update(taskboxes).then(() => {
         
-    }); 
-}
+//     }); 
+// }
 
 
