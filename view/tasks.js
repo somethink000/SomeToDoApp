@@ -1,30 +1,4 @@
 
-// var taskboxes = [
-//     {
-//         title : 'fps',
-//         tasks : [
-//             {done: false, current: false, text: 'сделать те самые штуки'},
-//             {done: false, current: false, text: 'сделать те самые штуки и те ещё и те'},
-//         ]
-
-//     },
-//     {
-//         title : 'tommorow',
-//         tasks : [
-//             {done: false, current: false, text: 'приготовить плоф'},
-//             {done: false, current: true, text: 'покушоть'},
-//         ]
-//     },
-//     {
-//         title : 'Todo',
-//         tasks : [
-//             {done: true, current: false, text: 'скибиди доп доп '},
-//         ]
-        
-//     },
-// ];
-
-
 
 function addTaskBox(taskbox, index) {
 
@@ -81,13 +55,14 @@ function addTask(taskdata, index, taskbox) {
 
 function checkTask(event){
     let parentTask = event.target.parentNode
-    
+    //updateData()
+    let taskboxid = getTaskBoxId(parentTask.parentNode);
     if (tasks[parentTask.id].done){
         
         tasks[parentTask.id].done = false;
         parentTask.classList.remove('taskcomplete') 
     }else{
-
+        
         tasks[parentTask.id].done = true;
         parentTask.classList.add('taskcomplete')
         

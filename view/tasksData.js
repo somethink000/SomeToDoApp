@@ -2,7 +2,7 @@
 
 
 const func = async () => {
-    const response = await window.tasksDataController.getTasksData();
+    const response = await window.tasksDataController.get();
     console.log(response) // prints out 'pong'
 
     var taskboxes = response;
@@ -14,3 +14,13 @@ const func = async () => {
 }
 
 func()
+
+
+function updateData() {
+    
+    globalThis.tasksDataController.update(taskboxes).then(() => {
+        
+    }); 
+}
+
+

@@ -29,8 +29,9 @@ const createWindow = () => {
     try {
 
       if (fs.existsSync( filePath )) {
-        tasksData = require(filePath);
-      
+        // tasksData = require(filePath);
+        const data = fs.readFileSync(filePath);
+        tasksData = JSON.parse(data);
       } else {
 
         tasksData = [
@@ -59,6 +60,16 @@ const createWindow = () => {
     return tasksData;  
   
   });
+
+
+  ipcMain.handle('data_sync', (e, mewdata) => {
+
+    const fs = require('fs');
+    const filePath = ("./data/tasksData.json");
+    fs.writeFileSync(filePath, JSON.stringify(mewdata));
+  
+  });
+
 }
 
 app.whenReady().then(() => {
