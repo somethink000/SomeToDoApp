@@ -1,5 +1,4 @@
 
-
 function addTaskBox(taskbox) {
     
     let div = document.createElement('div');
@@ -122,9 +121,9 @@ function createNewTask(title, curr, box){
 
 function attachTask( task, target ){
     let targ;
-
     globalThis.tasksDataController.getTask( task.id ).then((response) => {
         let taskData = response[0];
+        console.log(taskData);
         if (targ = target.closest("#current-task-block")) {
 
             taskData.current = true;
@@ -196,12 +195,14 @@ function createTaskBox(event){
 
 
 function removeTaskBox(event){
-    // let parentTask = event.target.parentNode.parentNode
-    // // console.log(parentTask);    
-    // parentTask.id.slice(7,8)
-    // globalThis.tasksDataController.removeTasksByBox( parentTask.id ).then(() => {
-    //     parentTask.remove();
-    // }); 
+    let parentTask = event.target.parentNode.parentNode
+    let taskBoxId = parentTask.id.slice(7,8)
+    
+    globalThis.tasksDataController.removeTasksByBox( taskBoxId ).then(() => {
+        globalThis.tasksDataController.removeTaskBox( taskBoxId ).then(() => {
+            parentTask.remove();
+        });
+    }); 
    
     
 }

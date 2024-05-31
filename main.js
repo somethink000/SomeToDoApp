@@ -50,7 +50,7 @@ const createWindow = () => {
   })
 
   win.loadFile('./view/index.html')
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
 
 
@@ -60,7 +60,6 @@ const createWindow = () => {
         
         db.all(sqlQuery, (err, rows) => {
           res(rows);
-          console.log(err);
         });
     });
   });
