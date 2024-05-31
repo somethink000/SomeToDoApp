@@ -11,7 +11,10 @@ function addTaskBox(taskbox) {
     div.setAttribute('id', "taskbox"+taskbox.id);
     div.innerHTML = `
         <div class="task-block-name">
+
             <p class="title">${taskbox.title}</p>
+            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTaskBox(event)"/>
+            
         </div>
 
         <div class="baseline"><div class="baseline_line"></div></div>
@@ -175,4 +178,30 @@ function attachTask( task, target ){
         }); 
         
     });
+}
+
+function createTaskBox(event){
+    var input = document.getElementById("newTaskBoxInput");
+
+    globalThis.tasksDataController.createTaskBox( input.value ).then(() => {
+
+        globalThis.tasksDataController.getLastTaskBox( ).then((response) => {
+            
+            let lastTaskBox = response[0]
+            event.target.closest(".createTaskbox").remove()
+            addTaskBox(lastTaskBox)
+        }); 
+    }); 
+}
+
+
+function removeTaskBox(event){
+    // let parentTask = event.target.parentNode.parentNode
+    // // console.log(parentTask);    
+    // parentTask.id.slice(7,8)
+    // globalThis.tasksDataController.removeTasksByBox( parentTask.id ).then(() => {
+    //     parentTask.remove();
+    // }); 
+   
+    
 }
