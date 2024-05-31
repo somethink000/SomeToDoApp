@@ -10,31 +10,20 @@ function drag(ev) {
 
 function drop(ev) {
 
-    var targ; 
+    // var targ; 
     var dragiable = document.getElementById(ev.dataTransfer.getData("text"));
 
     if (dragiable.classList.contains("task-block")) {
         
-        targ = dragiable.parentNode;
+        //targ = dragiable.parentNode;
     }else{
-
-        if (targ = ev.target.closest("#current-task-block")) {
-            tasks[dragiable.id].current = true;
-            if (tasks[dragiable.id].done){
-                tasks[dragiable.id].done = false;
-                dragiable.classList.remove('taskcomplete')
-            }
-        } else if(targ = ev.target.closest(".task-block")) {
-            if (tasks[dragiable.id].current) {
-                tasks[dragiable.id].current = false;
-            }
-        } 
+        attachTask( dragiable, ev.target )
+        
     }
 
-    if (targ) {
-        ev.preventDefault();
-        targ.appendChild(dragiable);
-    }
+   
+        //ev.preventDefault();
+      
 }
 
 

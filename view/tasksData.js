@@ -13,7 +13,7 @@ async function loadPage() {
     tasks.forEach((taskdata) => {
         addTask(taskdata, taskdata.taskBoxId)
     });
-   
+    
 }
 
 loadPage()

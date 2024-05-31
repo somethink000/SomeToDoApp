@@ -60,6 +60,7 @@ const createWindow = () => {
         
         db.all(sqlQuery, (err, rows) => {
           res(rows);
+          console.log(err);
         });
     });
   });

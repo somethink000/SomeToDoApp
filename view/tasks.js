@@ -28,10 +28,14 @@ function addTask(taskdata, boxid) {
     task.setAttribute('draggable', "true");
     task.setAttribute('ondragstart', "drag(event)");
     task.setAttribute('id', taskdata.id);
-    // task.addEventListener("click", checkTask);
+
     task.innerHTML = `
+        
         <p class="txt">${taskdata.text}</p>
-        <img class="circle_image_button" src="./assets/check.png" width="26" onclick="checkTask(event)"/>
+        <div class="task_acts">
+            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
+            <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)"/>
+        </div>
     `;
 
     
@@ -39,58 +43,136 @@ function addTask(taskdata, boxid) {
         task.classList.add('taskcomplete')
     }
 
-    if (taskdata.current) {
-        document.getElementById("current-task-block").append(task);
+    if (taskdata.current || boxid == 0) {
+        attachTask( task, document.getElementById("current-task-block") )
     } else {
-        document.getElementById("taskbox"+boxid).append(task);
+        attachTask( task, document.getElementById("taskbox"+boxid) )
     }
 }
 
 
 function checkTask(event){
-    let parentTask = event.target.parentNode
-    //updateData()
-    let taskboxid = getTaskBoxId(parentTask.parentNode);
-    if (tasks[parentTask.id].done){
-        
-        tasks[parentTask.id].done = false;
-        parentTask.classList.remove('taskcomplete') 
-    }else{
-        
-        tasks[parentTask.id].done = true;
-        parentTask.classList.add('taskcomplete')
-        
-        if (tasks[parentTask.id].current){
-
-            document.getElementById("taskbox"+tasks[parentTask.id].boxid).appendChild(parentTask);
-            tasks[parentTask.id].current = false;
-        }
-    }
+    let parentTask = event.target.parentNode.parentNode
     
-    // tasks[parentTask.id].done = ;
+    globalThis.tasksDataController.getTask( parentTask.id ).then((response) => {
+       
+        let taskData = response[0];
+        
+        if (taskData.done){
+        
+            taskData.done = false;
+            parentTask.classList.remove('taskcomplete') 
+
+            globalThis.tasksDataController.updateTask( taskData ).then(() => {
+            
+            }); 
+
+        }else{
+            
+            taskData.done = true;
+            parentTask.classList.add('taskcomplete')
+            
+            globalThis.tasksDataController.updateTask( taskData ).then(() => {
+            
+            }); 
+
+            if (taskData.current){
+                
+                if (taskData.taskBoxId != 0){
+                    attachTask( parentTask, document.getElementById("taskbox"+taskData.taskBoxId) )
+                    // document.getElementById("taskbox"+taskData.taskBoxId).appendChild(parentTask);
+                }
+            }
+        }
+        
+       
+    
+    }); 
+    
+    
+}
+function removeTask(event){
+    let parentTask = event.target.parentNode.parentNode
+    
+    globalThis.tasksDataController.removeTask( parentTask.id ).then(() => {
+        parentTask.remove();
+    }); 
+   
     
 }
 
+
 function createNewTask(title, curr, box){
 
-    globalThis.tasksDataController.createTask( title, curr, box ).then((response) => {
+    globalThis.tasksDataController.createTask( title, curr, box ).then(() => {
 
         // let boxToAttach = document.getElementById("taskbox"+box);
         // if (box == 0) boxToAttach = document.getElementById("");
-
-        globalThis.tasksDataController.getLastTask( ).then((response) => {
-
-        }); 
-            
-        // getTask
-        // addTask(takdata, box);
         
+        globalThis.tasksDataController.getLastTask().then((responce) => {
+            let newtask = responce[0]
+            addTask(newtask, newtask.taskBoxId);
+        }); 
     }); 
+}
 
-    // window.tasksDataController.createTask();
 
+function attachTask( task, target ){
+    let targ;
 
-    // var takdata = taskboxes[0].tasks.push({done: false, current: curr, boxid: 0, text: title});
-    // console.log(taskboxes[0].tasks[takdata - 1]);
-    
+    globalThis.tasksDataController.getTask( task.id ).then((response) => {
+        let taskData = response[0];
+        if (targ = target.closest("#current-task-block")) {
+
+            taskData.current = true;
+            
+            if (taskData.taskBoxId != 0) {
+                if (taskData.done){
+                    taskData.done = false;
+                    task.classList.remove('taskcomplete')
+                }
+                
+               
+                globalThis.tasksDataController.getTaskBox( taskData.taskBoxId ).then((response) => {
+                    task.innerHTML = `
+                        <p class="txt taskcat">${response[0].title.slice( 0, 3 )}</p>
+                        <p class="txt">${taskData.text}</p>
+                        <div class="task_acts">
+                            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
+                            <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)"/>
+                        </div>
+                    `;
+                });
+            }
+           
+        
+
+        } else if(targ = target.closest(".task-block")) {
+
+            if (taskData.current) {
+
+                taskData.current = false;
+                task.innerHTML = `
+                    <p class="txt">${taskData.text}</p>
+                    <div class="task_acts">
+                        <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
+                        <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)"/>
+                    </div>
+                `;
+            }
+            let taskboxid = targ.id.slice(7, 8);
+            if (taskData.taskBoxId != taskboxid){
+                taskData.taskBoxId = taskboxid;
+            }
+        } 
+        
+        
+
+        globalThis.tasksDataController.updateTask( taskData ).then(() => {
+            if (targ) {
+                targ.appendChild(task);
+            }
+        }); 
+        
+    });
 }
