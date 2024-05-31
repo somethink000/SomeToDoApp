@@ -40,7 +40,7 @@ const createWindow = () => {
     transparent: true,
     width: 1000,
     height: 800,
-    title: 'Nofw',
+    title: 'TaskToDo',
     // frame: false,
     vibrancy: 'fullscreen-ui',
     backgroundMaterial: 'acrylic',
@@ -50,10 +50,6 @@ const createWindow = () => {
   })
 
   win.loadFile('./view/index.html')
-  // win.webContents.openDevTools();
-
-
-
 
   ipcMain.handle('db-query', async (event, sqlQuery) => {
     return new Promise(res => {

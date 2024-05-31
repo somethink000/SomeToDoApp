@@ -10,7 +10,6 @@ function drag(ev) {
 
 function drop(ev) {
 
-    
     var dragiable = document.getElementById(ev.dataTransfer.getData("text"));
 
     if (dragiable.classList.contains("task-block")) {

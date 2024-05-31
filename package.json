@@ -4,14 +4,24 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
-  "author": "",
+  "author": "Evil'Inc",
   "license": "ISC",
-  "description": "",
+  "description": "Tasks styled ToDo aplication",
+  "devDependencies": {
+    "electron": "^30.0.8",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
   "dependencies": {
     "@electron/rebuild": "^3.6.0",
-    "electron": "^30.0.8",
     "sqlite3": "^5.1.7"
   }
 }
