@@ -3,23 +3,7 @@ const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
 const sqlite3 = require('sqlite3').verbose();;
 
-
-
-const createWindow = () => {
-  const win = new BrowserWindow({
-    transparent: true,
-    width: 1000,
-    height: 800,
-    title: 'TaskToDo',
-    // frame: false,
-    vibrancy: 'fullscreen-ui',
-    backgroundMaterial: 'acrylic',
-    webPreferences: {
-      preload: path.join(__dirname, '/preload.js')
-    }
-  })
-
-  var db = new sqlite3.Database(__dirname + '/data/taskToDo.db');
+var db = new sqlite3.Database(app.getPath('userData') + '/todo');
 
   db.all(`SELECT id FROM tasksBoxes ORDER BY id DESC LIMIT 1`, (err, result) => {
     if(result === undefined){
@@ -29,7 +13,7 @@ const createWindow = () => {
           id INTEGER PRIMARY KEY,
           title TEXT NOT NULL
         )`);
-  
+        
         db.run(`CREATE TABLE tasks (
           id INTEGER PRIMARY KEY,
           text TEXT NOT NULL,
@@ -47,11 +31,24 @@ const createWindow = () => {
     }
   });
 
+const createWindow = () => {
+  const win = new BrowserWindow({
+    transparent: true,
+    width: 1000,
+    height: 800,
+    title: 'TaskToDo',
+    // frame: false,
+    vibrancy: 'fullscreen-ui',
+    backgroundMaterial: 'acrylic',
+    webPreferences: {
+      preload: path.join(__dirname, '/preload.js')
+    }
+  })
 
 
   win.loadFile('./view/index.html')
 
-
+  // console.log(app.getPath('userData'));
   ipcMain.handle('db-query', async (event, sqlQuery) => {
     return new Promise(res => {
         
