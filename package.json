@@ -3,25 +3,27 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "app:dir": "electron-builder --dir",
-    "app:dist": "electron-builder"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "Evil'Inc",
   "license": "ISC",
   "description": "Tasks styled ToDo aplication",
   "devDependencies": {
-    "electron": "^30.0.8",
-    "electron-builder": "^24.13.3"
-  },
-  "build": {
-    "appId": "your.id",
-    "mac": {
-      "category": "your.app.category.type"
-    }
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "@electron/rebuild": "^3.6.0",
+    "electron": "^30.0.8"
   },
   "dependencies": {
-    "@electron/rebuild": "^3.6.0",
-    "sqlite3": "^5.1.7"
+    "electron-squirrel-startup": "^1.0.1",
+    "sqlite3": "^5.1.6"
   }
 }
