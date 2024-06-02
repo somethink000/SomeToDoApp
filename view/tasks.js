@@ -123,7 +123,7 @@ function attachTask( task, target ){
     let targ;
     globalThis.tasksDataController.getTask( task.id ).then((response) => {
         let taskData = response[0];
-        console.log(taskData);
+
         if (targ = target.closest("#current-task-block")) {
 
             taskData.current = true;

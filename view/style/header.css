@@ -1,10 +1,42 @@
 
+header {
+   justify-content: center; 
+   width: 100%;
+   background-color: rgba(20, 20, 20, 1);
+}
 .head-ctrl-box {
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding-top: 6px;
-    padding-bottom: 6px;
+   
+    /* margin-left: 56px;
+    margin-right: 56px; */
+    width: 95%;
+    /* padding-top: 6px;
+    padding-bottom: 6px; */
+    
 
 }
 
+.head_btns {
+    align-items: center;
+}
+
+.head-menu-btns{
+    /*  */
+    padding: 2px;
+    margin: 6px;
+}
+.head-menu-btns:hover {
+    border-radius: 50%;
+    background-color: rgb(100, 100, 100);
+}
+.head-menu-btns:active {
+    background-color: rgb(50, 50, 50);
+}
+.side_buttons_line {
+    margin-left: 16px;
+    margin-right: 16px;
+    width: 1px;
+    height: 32px;
+    background-color: rgba(100, 100, 100, 1);
+}

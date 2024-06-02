@@ -13,14 +13,16 @@
     /* margin-top: 30px; */
     padding: 12px;
     width: 400px;
+    max-height: 780px;
 }
 
 
 .tasks_place {
-    /* width: 70%; */
+
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 12px;
+    max-height: 100%;
+    padding: 6px;
 }
 
 .task-block {
@@ -28,7 +30,8 @@
     border-radius: 10px;
     margin: 12px;
     padding: 12px;
-    width: 380px;
+    width: 350px;
+    max-height: 390px;
 }
 .task-block-name {
     padding: 8px;
@@ -47,6 +50,7 @@
         border-right: 1px solid rgb(100, 100, 100);
         text-shadow: 2px 1px 4px white;
     }
+
     .task_acts {
         border-left: 1px solid rgb(100, 100, 100);
     }

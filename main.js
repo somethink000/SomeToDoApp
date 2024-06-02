@@ -36,7 +36,6 @@ const createWindow = () => {
     transparent: true,
     width: 1000,
     height: 800,
-    title: 'TaskToDo',
     // frame: false,
     vibrancy: 'fullscreen-ui',
     backgroundMaterial: 'acrylic',
@@ -44,11 +43,11 @@ const createWindow = () => {
       preload: path.join(__dirname, '/preload.js')
     }
   })
-
+  win.webContents.openDevTools()
 
   win.loadFile('./view/index.html')
 
-  // console.log(app.getPath('userData'));
+  
   ipcMain.handle('db-query', async (event, sqlQuery) => {
     return new Promise(res => {
         

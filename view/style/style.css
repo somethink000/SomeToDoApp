@@ -5,6 +5,7 @@
 @import "buttons.css";
 @import "forms.css";
 @import "header.css";
+@import "sparks/sparks_animation.css";
 
 @import "index.css";
 @import "createTaskbox.css";
