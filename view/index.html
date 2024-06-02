@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-   
-    <link rel="stylesheet" href="./style/style.css">
-    
-    <script src="./tasks.js" defer></script>
-    <script src="./tasksData.js" defer></script>
-    <script src="./index.js" defer></script>
-    <script src="./sparksAnimation.js" defer></script>
 
-  </head>
+<head>
+  <meta charset="UTF-8" />
 
-  <body id="body" class="blur">
+  <link rel="stylesheet" href="./style/style.css">
 
-    <div id="particles_container" class="particles_container">
-         <!-- for ($i = 1; $i <= 100; $i++) -->
-          <!-- <div class="circle-container">
-                 <div class="circle"></div>
-          </div> -->
+  <script src="./todoLoad.js" defer></script>
 
-    </div>
+  <script src="./taskSort.js" defer></script>
+  <script src="./taskBoxSort.js" defer></script>
+
+  <script src="./taskActions.js" defer></script>
+  <script src="./taskBoxActions.js" defer></script>
+
+  <script src="./pageInput.js" defer></script>
+  <script src="./sparksAnimation.js" defer></script>
+
+</head>
 
 
 
-    <!-- <header>
+
+<body id="body" class="blur">
+
+
+  <div id="particles_container" class="particles_container"></div>
+
+
+  <!-- <header>
       <div class="head-ctrl-box">
       
           <h1 class="title">TaskToDo</h1>
@@ -52,55 +56,60 @@
       </div>
     </header> -->
 
-    <div class="baseline"><div class="baseline_line"></div></div>
+  <div class="baseline">
+    <div class="baseline_line"></div>
+  </div>
 
-    <div class="container">
-    
-      <div class="main-block">
-        <div class="tasks-main">
+  <div class="container">
+
+    <div class="main-block">
+      <div class="tasks-main">
 
 
-          <div class="current-tasks">
+        <div class="current-tasks">
 
-            <div id="current-task-block" class="current-task-block bl-box main-border" ondrop="drop(event)" ondragover="allowDrop(event)">
-              <!-- Title -->
-              <div class="task-block-name">
+          <div id="current-task-block" class="current-task-block bl-box main-border" ondrop="drop(event)"
+            ondragover="allowDrop(event)">
+            <!-- Title -->
+            <div class="task-block-name">
 
-                <p class="title">Today</p>
-                
-                <!-- <form class="task_form main-border" onsubmit="createForceTask(event)"> -->
-                <div class="task_form main-border">
-                  <input class="task_input" type="text" id="forceTask"  placeholder="New task">
-                </div>
-                <!-- </form>  -->
+              <p class="title">Today</p>
 
+              <!-- <form class="task_form main-border" onsubmit="createForceTask(event)"> -->
+              <div class="task_form main-border">
+                <input class="task_input" type="text" id="forceTask" placeholder="New task">
               </div>
+              <!-- </form>  -->
 
-              <div class="baseline"><div class="baseline_line"></div></div>
-              
-              <!-- Input -->
-              
-              
-            
-              
-              
             </div>
 
-          </div>
-          
+            <div class="baseline">
+              <div class="baseline_line"></div>
+            </div>
 
-          <div id="tasks_place" class="tasks_place">
+            <!-- Input -->
 
-            
-  
+
+
+
+
           </div>
+
+        </div>
+
+
+        <div id="tasks_place" class="tasks_place">
+
 
 
         </div>
+
+
       </div>
-      
     </div>
-  </body> 
-  
- 
+
+  </div>
+</body>
+
+
 </html>
