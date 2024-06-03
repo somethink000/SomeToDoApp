@@ -1,3 +1,22 @@
+
+
+
+
+function syncTaskBoxesSort(){
+    
+    let blocks_container = document.getElementById('tasks_place')
+    var boxes = blocks_container.getElementsByTagName("li");
+    
+    for (var i = 0; i < boxes.length; ++i) {
+
+        globalThis.tasksDataController.updateTaskBoxSort( boxes[i].id.slice(7, 8), i ).then((res) => {
+           
+        });
+    }
+}
+
+
+
 function dragTaskBox(event) {
     // Adding dragging class to task after a delay
     setTimeout(() => event.target.classList.add("dragging"), 0);

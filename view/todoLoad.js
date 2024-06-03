@@ -48,6 +48,26 @@ function addTaskBox(taskbox) {
 
     tasks_place.append(div);
 
+    globalThis.tasksDataController.tasksByBlock( taskbox.id ).then((res) => {
+        
+        res.sort(function(a, b) { 
+            return a.sortId - b.sortId;
+        });
+        res.forEach((taskdata) => {
+            // console.log(taskdata.text);
+            addTask(taskdata, taskdata.taskBoxId)
+        });
+        
+        // for (var i = 0; i < taskes.length; ++i) {
+
+        //     globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
+        //         console.log("wdwd");
+        //     });
+        // }
+    });
+    // const tasks = await window.tasksDataController.tasks();
+    
+
 }
 
 function addTask(taskdata, boxid) {
@@ -70,6 +90,8 @@ function addTask(taskdata, boxid) {
     } else {
         attachTask(task, document.getElementById("taskbox" + boxid))
     }
+
+    
 }
 
 
@@ -77,16 +99,18 @@ async function loadPage() {
 
     const tasks_place = document.getElementById('tasks_place')
 
-    const taskBoxes = await window.tasksDataController.taskBoxes();
+    var taskBoxes = await window.tasksDataController.taskBoxes();
+
+    taskBoxes.sort(function(a, b) { 
+        return a.sortId - b.sortId;
+    });
+    
     taskBoxes.forEach((taskbox) => {
         addTaskBox(taskbox);
     });
-
-    const tasks = await window.tasksDataController.tasks();
-    tasks.forEach((taskdata) => {
-        addTask(taskdata, taskdata.taskBoxId)
-    });
-
+    
+    syncTaskBoxesSort()
+    
 }
 
 loadPage()

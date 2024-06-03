@@ -1,4 +1,47 @@
 
+function syncTaskPlaceSort(task){
+
+    globalThis.tasksDataController.getTask( task.id ).then((res) => {
+        let taskData = res[0];
+        let list;
+        let taskes;
+
+        list = document.getElementById('taskbox'+taskData.taskBoxId)
+        taskes = list.getElementsByTagName("li");
+        
+        for (var i = 0; i < taskes.length; ++i) {
+
+            globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
+               
+            });
+        }
+
+
+        let parentList = task.parentNode;
+        console.log(task.parentNode);
+        if (taskData.taskBoxId != parentList.parentNode.id.slice(7, 8)) {
+
+            taskes = parentList.getElementsByTagName("li");
+            
+            for (var i = 0; i < taskes.length; ++i) {
+
+                globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
+                    
+                });
+            }
+        } 
+        
+
+    });
+    // let taskData;
+    
+    // globalThis.tasksDataController.getTask(task.id).then((response) => {
+    //     taskData = response[0];
+    //     console.log(taskData);
+    // });
+}
+
+
 function attachTask(task, target) {
     let targ;
     globalThis.tasksDataController.getTask(task.id).then((response) => {
@@ -14,11 +57,13 @@ function attachTask(task, target) {
                     task.classList.remove('taskcomplete')
                 }
 
-
+                
                 globalThis.tasksDataController.getTaskBox(taskData.taskBoxId).then((response) => {
                     task.innerHTML = getCurrentTaskHtml(response[0].title.slice(0, 3), taskData.text);
 
                 });
+            }else {
+                task.innerHTML = getCurrentTaskHtml(" ", taskData.text);
             }
 
         } else if (targ = target.closest(".task-block").querySelector('.task_block_list')) {
@@ -46,14 +91,6 @@ function attachTask(task, target) {
     });
 }
 
-function syncTaskPlaceData(task){
-    let taskData;
-    
-    globalThis.tasksDataController.getTask(task.id).then((response) => {
-        taskData = response[0];
-        console.log(taskData);
-    });
-}
 
 function dragTask(event) {
     // Adding dragging class to task after a delay
@@ -62,7 +99,7 @@ function dragTask(event) {
 
 function dragendTask(event) {
     event.target.classList.remove("dragging");
-    syncTaskPlaceData(event.target)
+    syncTaskPlaceSort(event.target);
 }
 
 function dragOverTasklist(event) {

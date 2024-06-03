@@ -8,7 +8,7 @@ function createNewTask(title, curr, box) {
             addTask(newtask, newtask.taskBoxId);
         });
     });
-}
+}syncTaskPlaceSort(task);
 
 
 function forceCurrent(event) {
