@@ -1,24 +1,24 @@
 
 
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+// function allowDrop(ev) {
+//     ev.preventDefault();
+// }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+// function drag(ev) {
+//     ev.dataTransfer.setData("text", ev.target.id);
+// }
 
-function drop(ev) {
+// function drop(ev) {
 
-    var dragiable = document.getElementById(ev.dataTransfer.getData("text"));
+//     var dragiable = document.getElementById(ev.dataTransfer.getData("text"));
 
-    if (dragiable.classList.contains("task-block")) {
+//     if (dragiable.classList.contains("task-block")) {
            
-    }else{
-        attachTask( dragiable, ev.target )
-        
-    }
-}
+//     }else{
+//         attachTask( dragiable, ev.target )
+//         console.log(dragiable);
+//     }
+// }
 
 
 

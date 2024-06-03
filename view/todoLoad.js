@@ -23,25 +23,34 @@ function getBoxedTaskHtml(text) {
     `;
 }
 
+// <li class="item" draggable="true">
+// <div class="details">
+//     <img src="images/img-1.jpg">
+//     <span>Kristina Zasiadko</span>
+// </div>
+// <i class="uil uil-draggabledots"></i>
+// </li>
 
 function addTaskBox(taskbox) {
 
     let div = document.createElement('div');
     div.setAttribute('class', 'task-block bl-box main-border');
-    div.setAttribute('ondrop', "drop(event)");
-    div.setAttribute('ondragover', "allowDrop(event)");
-    div.setAttribute('draggable', "true");
-    div.setAttribute('ondragstart', "drag(event)");
+    // div.setAttribute('ondrop', "drop(event)");
+    // div.setAttribute('', "allowDrop(event)");
+    // div.setAttribute('draggable', "true");
+    // div.setAttribute('ondragstart', "drag(event)");
     div.setAttribute('id', "taskbox" + taskbox.id);
     div.innerHTML = `
         <div class="task-block-name">
-
             <p class="title">${taskbox.title}</p>
-            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTaskBox(event)"/>
-            
+            <img class="circle_image_button" src="./assets/dots.png" width="20" onclick="removeTaskBox(event)"/>
         </div>
 
         <div class="baseline"><div class="baseline_line"></div></div>
+
+        <ul class="task_block_list" ondragover="dragOverTasklist(event)" ondragenter="dragEnterTasklist(event)"> 
+
+        </ul>
     `;
 
 
@@ -50,11 +59,12 @@ function addTaskBox(taskbox) {
 }
 
 function addTask(taskdata, boxid) {
-    let task = document.createElement('div');
+    let task = document.createElement('li');
     task.setAttribute('class', "task main-border");
     task.setAttribute('draggable', "true");
-    task.setAttribute('ondragstart', "drag(event)");
-    task.setAttribute('id', taskdata.id);
+    task.setAttribute('ondragstart', "dragTask(event)");
+    task.setAttribute('ondragend', "dragendTask(event)");
+    task.setAttribute('id', taskdata.id); 
 
     task.innerHTML = getBoxedTaskHtml(taskdata.text);
 
@@ -73,8 +83,6 @@ function addTask(taskdata, boxid) {
 async function loadPage() {
 
     const tasks_place = document.getElementById('tasks_place')
-
-
 
     const taskBoxes = await window.tasksDataController.taskBoxes();
     taskBoxes.forEach((taskbox) => {

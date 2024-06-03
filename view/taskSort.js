@@ -14,14 +14,14 @@ function attachTask(task, target) {
                     task.classList.remove('taskcomplete')
                 }
 
-
+                
                 globalThis.tasksDataController.getTaskBox(taskData.taskBoxId).then((response) => {
                     task.innerHTML = getCurrentTaskHtml(response[0].title.slice(0, 3), taskData.text);
 
                 });
             }
 
-        } else if (targ = target.closest(".task-block")) {
+        } else if (targ = target.closest(".task-block").querySelector('.task_block_list')) {
 
 
             if (taskData.current) {
@@ -44,4 +44,33 @@ function attachTask(task, target) {
         });
 
     });
+}
+
+
+
+function dragTask(event) {
+    // Adding dragging class to task after a delay
+    setTimeout(() => event.target.classList.add("dragging"), 0);
+}
+
+function dragendTask(event) {
+    event.target.classList.remove("dragging");
+}
+
+function dragOverTasklist(event) {
+    event.preventDefault();
+    const draggingtask = document.querySelector(".dragging");
+    // Getting all tasks except currently dragging and making array of them
+    let siblings = [...event.target.querySelectorAll(".task:not(.dragging)")];
+
+    // Finding the sibling after which the dragging task should be placed
+    let nextSibling = siblings.find(sibling => {
+        return event.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+    });
+    // Inserting the dragging task before the found sibling
+    event.target.insertBefore(draggingtask, nextSibling);
+}
+
+function dragEnterTasklist(event) {
+    e.preventDefault()
 }
