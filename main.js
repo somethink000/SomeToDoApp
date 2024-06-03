@@ -4,14 +4,15 @@ const path = require('node:path')
 const sqlite3 = require('sqlite3').verbose();;
 
 var db = new sqlite3.Database(app.getPath('userData') + '/todo');
-
+console.log(app.getPath('userData'));
 db.all(`SELECT id FROM tasksBoxes ORDER BY id DESC LIMIT 1`, (err, result) => {
   if (result === undefined) {
     db.serialize(() => {
 
       db.run(`CREATE TABLE tasksBoxes (
           id INTEGER PRIMARY KEY,
-          title TEXT NOT NULL
+          title TEXT NOT NULL,
+          sortId INT NOT NULL
         )`);
 
       db.run(`CREATE TABLE tasks (
@@ -19,13 +20,14 @@ db.all(`SELECT id FROM tasksBoxes ORDER BY id DESC LIMIT 1`, (err, result) => {
           text TEXT NOT NULL,
           done BIT NOT NULL,
           current BIT NOT NULL,
-          taskBoxId INT NOT NULL
+          taskBoxId INT NOT NULL,
+          sortId INT NOT NULL
         )`);
 
-      db.run("INSERT INTO tasksBoxes (title) VALUES ('TaskToDo')");
-      db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Setup my tusks', false, true, 1)");
-      db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Proud of yourself', false, false, 1)");
-      db.run("INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('Install TuskToDo', true, false, 1)");
+      db.run("INSERT INTO tasksBoxes (title, sortId) VALUES ('TaskToDo', 0)");
+      db.run("INSERT INTO tasks (text, done, current, taskBoxId, sortId) VALUES ('Setup my tusks', false, true, 1, 0)");
+      db.run("INSERT INTO tasks (text, done, current, taskBoxId, sortId) VALUES ('Proud of yourself', false, false, 1, 1)");
+      db.run("INSERT INTO tasks (text, done, current, taskBoxId, sortId) VALUES ('Install TuskToDo', true, false, 1, 2)");
 
     });
   }
@@ -37,6 +39,7 @@ const createWindow = () => {
     width: 1000,
     height: 800,
     // frame: false,
+    title: "TaskToDo",
     vibrancy: 'fullscreen-ui',
     backgroundMaterial: 'acrylic',
     webPreferences: {

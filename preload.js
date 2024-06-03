@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('tasksDataController', {
   createTaskBox: (title) => ipcRenderer.invoke('db-query', "INSERT INTO tasksBoxes (title) VALUES ('" + title + "')"),
   getLastTaskBox: () => ipcRenderer.invoke('db-query', "SELECT * FROM tasksBoxes WHERE id = (SELECT MAX(id) FROM tasksBoxes)"),
   removeTaskBox: (id) => ipcRenderer.invoke('db-query', "DELETE FROM tasksBoxes WHERE id = " + id + ""),
-
+  
 
   tasks: () => ipcRenderer.invoke('db-query', "SELECT * FROM tasks"),
   createTask: (text, curr, boxid) => ipcRenderer.invoke('db-query', "INSERT INTO tasks (text, done, current, taskBoxId) VALUES ('" + text + "', false, " + curr + ", " + boxid + ")"),

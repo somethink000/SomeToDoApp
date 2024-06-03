@@ -28,83 +28,52 @@
   <div id="particles_container" class="particles_container"></div>
 
 
-  <!-- <header>
-      <div class="head-ctrl-box">
-      
-          <h1 class="title">TaskToDo</h1>
-         
-          <div class="head_btns">
+  <div class="main-block">
 
-            <button class="add_button bl-box main-border" onclick="createTaskBoxWindow(event)">
-              <img class="head_image" src="./assets/plus.png" width="32"/>
-              <p class="txt">Add task block</p>
-            </button>
+    <div class="current-tasks">
 
-            <button class="add_button bl-box main-border">
-              <img class="head_image" src="./assets/settings.png" width="32"/>
-            </button>
-            
-            <div class="side_buttons_line"></div>
+      <div class="boxes_place_ctrls">
 
-              <img class="head_image head-menu-btns" src="./assets/frames.png" width="28"/>
+        <button class="add_button bl-box main-border" onclick="createTaskBoxWindow(event)">
+          <img class="head_image" src="./assets/plus.png" width="32" />
+          <p class="txt">Create box</p>
+        </button>
 
-              <img class="head_image head-menu-btns" src="./assets/scale.png" width="28"/>
-
-              <img class="head_image head-menu-btns" src="./assets/cross.png" width="28"/>
-
-          </div>
-      </div>
-    </header> -->
-
-  <div class="container">
-    <div class="main-block">
-      <div class="tasks-main">
-
-        <div class="current-tasks">
-
-          <div id="current-task-block" class="current-task-block bl-box main-border" ondrop="drop(event)"
-            ondragover="allowDrop(event)">
-            <!-- Title -->
-            <div class="task-block-name">
-
-              <p class="title">Today</p>
-
-              <!-- <form class="task_form main-border" onsubmit="createForceTask(event)"> -->
-              <div class="task_form main-border">
-                <input class="task_input" type="text" id="forceTask" placeholder="New task">
-              </div>
-              <!-- </form>  -->
-
-            </div>
-
-            <div class="baseline">
-              <div class="baseline_line"></div>
-            </div>
-
-            <!-- Input -->
-
-
-
-
-
-          </div>
-
-        </div>
-
-
-        <div id="tasks_place" class="tasks_place">
-
-          
-
-        </div>
-
+        <button class="add_button bl-box main-border">
+          <img class="head_image" src="./assets/settings.png" width="32" />
+        </button>
 
       </div>
 
+      <div id="current-task-block" class="current-task-block bl-box main-border">
 
-       
+        <div class="task-block-name">
+          <p class="title">Today</p>
+          <div class="task_form main-border">
+            <input class="task_input" type="text" id="forceTask" placeholder="New task">
+          </div>
+        </div>
+
+        <div class="baseline">
+          <div class="baseline_line"></div>
+        </div>
+
+        <ul class="task_block_list" ondragover="dragOverTasklist(event)" ondragenter="dragEnterTasklist(event)">
+        </ul>
+
+      </div>
+
     </div>
 
+
+    <div class="boxes_main">
+
+      <!-- ondragover="dragOverTaskContainer(event)" ondragenter="dragEnterTaskContainer(event)" -->
+      <ul id="tasks_place" class="boxes_container" > 
+
+      </ul>
+
+    </div>
   </div>
 </body>
 

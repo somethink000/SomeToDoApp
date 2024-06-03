@@ -23,22 +23,14 @@ function getBoxedTaskHtml(text) {
     `;
 }
 
-// <li class="item" draggable="true">
-// <div class="details">
-//     <img src="images/img-1.jpg">
-//     <span>Kristina Zasiadko</span>
-// </div>
-// <i class="uil uil-draggabledots"></i>
-// </li>
 
 function addTaskBox(taskbox) {
 
-    let div = document.createElement('div');
+    let div = document.createElement('li');
     div.setAttribute('class', 'task-block bl-box main-border');
-    // div.setAttribute('ondrop', "drop(event)");
-    // div.setAttribute('', "allowDrop(event)");
-    // div.setAttribute('draggable', "true");
-    // div.setAttribute('ondragstart', "drag(event)");
+    div.setAttribute('draggable', "true");
+    div.setAttribute('ondragstart', "dragTaskBox(event)");
+    div.setAttribute('ondragend', "dragendTaskBox(event)");
     div.setAttribute('id', "taskbox" + taskbox.id);
     div.innerHTML = `
         <div class="task-block-name">
@@ -73,6 +65,7 @@ function addTask(taskdata, boxid) {
     }
 
     if (taskdata.current || boxid == 0) {
+        // console.log(document.getElementById("current-task-block").querySelector('.task_block_list'));
         attachTask(task, document.getElementById("current-task-block"))
     } else {
         attachTask(task, document.getElementById("taskbox" + boxid))

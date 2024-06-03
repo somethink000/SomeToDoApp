@@ -1,5 +1,5 @@
 {
-  "name": "some-todo-app",
+  "name": "tasktodo",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {

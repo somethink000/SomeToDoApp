@@ -3,9 +3,9 @@ function attachTask(task, target) {
     let targ;
     globalThis.tasksDataController.getTask(task.id).then((response) => {
         let taskData = response[0];
-
+        
         if (targ = target.closest("#current-task-block")) {
-
+            targ = targ.querySelector('.task_block_list')
             taskData.current = true;
 
             if (taskData.taskBoxId != 0) {
@@ -14,7 +14,7 @@ function attachTask(task, target) {
                     task.classList.remove('taskcomplete')
                 }
 
-                
+
                 globalThis.tasksDataController.getTaskBox(taskData.taskBoxId).then((response) => {
                     task.innerHTML = getCurrentTaskHtml(response[0].title.slice(0, 3), taskData.text);
 
@@ -46,7 +46,14 @@ function attachTask(task, target) {
     });
 }
 
-
+function syncTaskPlaceData(task){
+    let taskData;
+    
+    globalThis.tasksDataController.getTask(task.id).then((response) => {
+        taskData = response[0];
+        console.log(taskData);
+    });
+}
 
 function dragTask(event) {
     // Adding dragging class to task after a delay
@@ -55,6 +62,7 @@ function dragTask(event) {
 
 function dragendTask(event) {
     event.target.classList.remove("dragging");
+    syncTaskPlaceData(event.target)
 }
 
 function dragOverTasklist(event) {
@@ -65,12 +73,22 @@ function dragOverTasklist(event) {
 
     // Finding the sibling after which the dragging task should be placed
     let nextSibling = siblings.find(sibling => {
-        return event.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
+        // console.log();
+        return event.clientY + event.target.scrollTop <= sibling.offsetTop + sibling.offsetHeight / 4;
     });
-    // Inserting the dragging task before the found sibling
-    event.target.insertBefore(draggingtask, nextSibling);
+
+    // let taskbox = (event.target.closest(".task-block"))
+
+    if (nextSibling) {
+        event.target.insertBefore(draggingtask, nextSibling);
+    }else if (event.target.classList.contains("task_block_list")) {
+        // taskbox.querySelector('.task_block_list')
+        event.target.appendChild(draggingtask, nextSibling);
+    }
+
+
 }
 
 function dragEnterTasklist(event) {
-    e.preventDefault()
+    event.preventDefault()
 }
