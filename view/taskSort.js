@@ -1,24 +1,26 @@
 
-function syncTaskPlaceSort(task){
+function syncTasksSort(task){
 
     globalThis.tasksDataController.getTask( task.id ).then((res) => {
         let taskData = res[0];
         let list;
         let taskes;
 
-        list = document.getElementById('taskbox'+taskData.taskBoxId)
+       
+
+        list = document.getElementById('taskbox'+taskData.taskBoxId)//.querySelector('.task_block_list')
         taskes = list.getElementsByTagName("li");
         
         for (var i = 0; i < taskes.length; ++i) {
 
             globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
-               
+            
             });
         }
 
 
         let parentList = task.parentNode;
-        console.log(task.parentNode);
+        // console.log(task.parentNode);
         if (taskData.taskBoxId != parentList.parentNode.id.slice(7, 8)) {
 
             taskes = parentList.getElementsByTagName("li");
@@ -33,16 +35,48 @@ function syncTaskPlaceSort(task){
         
 
     });
-    // let taskData;
-    
-    // globalThis.tasksDataController.getTask(task.id).then((response) => {
-    //     taskData = response[0];
-    //     console.log(taskData);
-    // });
+
 }
 
+function syncTasksAttach(taskBeforeBox){
 
-function attachTask(task, target) {
+    globalThis.tasksDataController.getTask( task.id ).then((res) => {
+        let taskData = res[0];
+        let list;
+        let taskes;
+
+       
+
+        list = document.getElementById('taskbox'+taskData.taskBoxId)//.querySelector('.task_block_list')
+        taskes = list.getElementsByTagName("li");
+        
+        for (var i = 0; i < taskes.length; ++i) {
+
+            globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
+            
+            });
+        }
+
+
+        let parentList = task.parentNode;
+        // console.log(task.parentNode);
+        if (taskData.taskBoxId != parentList.parentNode.id.slice(7, 8)) {
+
+            taskes = parentList.getElementsByTagName("li");
+            
+            for (var i = 0; i < taskes.length; ++i) {
+
+                globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
+                    
+                });
+            }
+        } 
+        
+
+    });
+}
+
+function attachTask(task, target, init) {
     let targ;
     globalThis.tasksDataController.getTask(task.id).then((response) => {
         let taskData = response[0];
@@ -84,7 +118,11 @@ function attachTask(task, target) {
 
         globalThis.tasksDataController.updateTask(taskData).then(() => {
             if (targ) {
-                targ.appendChild(task);
+                targ.append(task);
+                if (!init){
+                    syncTasksSort(task);
+                }
+                
             }
         });
 

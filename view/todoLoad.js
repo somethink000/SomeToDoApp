@@ -24,6 +24,7 @@ function getBoxedTaskHtml(text) {
 }
 
 
+
 function addTaskBox(taskbox) {
 
     let div = document.createElement('li');
@@ -47,30 +48,10 @@ function addTaskBox(taskbox) {
 
 
     tasks_place.append(div);
-
-    globalThis.tasksDataController.tasksByBlock( taskbox.id ).then((res) => {
-        
-        res.sort(function(a, b) { 
-            return a.sortId - b.sortId;
-        });
-        res.forEach((taskdata) => {
-            // console.log(taskdata.text);
-            addTask(taskdata, taskdata.taskBoxId)
-        });
-        
-        // for (var i = 0; i < taskes.length; ++i) {
-
-        //     globalThis.tasksDataController.updateTaskSort( taskes[i].id, i ).then((res) => {
-        //         console.log("wdwd");
-        //     });
-        // }
-    });
-    // const tasks = await window.tasksDataController.tasks();
     
-
 }
 
-function addTask(taskdata, boxid) {
+function addTask(taskdata, boxid, init) {
     let task = document.createElement('li');
     task.setAttribute('class', "task main-border");
     task.setAttribute('draggable', "true");
@@ -86,12 +67,35 @@ function addTask(taskdata, boxid) {
 
     if (taskdata.current || boxid == 0) {
         // console.log(document.getElementById("current-task-block").querySelector('.task_block_list'));
-        attachTask(task, document.getElementById("current-task-block"))
+        attachTask(task, document.getElementById("current-task-block"), init)
     } else {
-        attachTask(task, document.getElementById("taskbox" + boxid))
+        attachTask(task, document.getElementById("taskbox" + boxid), init)
     }
 
     
+}
+
+function loadTasks(boxes){
+
+    globalThis.tasksDataController.tasksByBlock( 0 ).then((res) => {
+    
+        
+        res.sort(function(a, b) { 
+            return a.sortId - b.sortId;
+        });
+
+        for (var i = 0; i < res.length; ++i) {
+            let taskdata = res[i];
+            console.log(taskdata.sortId);
+            addTask(taskdata, taskdata.taskBoxId, true)
+        }
+        // res.forEach((taskdata) => {
+            
+        //     addTask(taskdata, taskdata.taskBoxId, true)
+        // });
+        
+        
+    });
 }
 
 
@@ -109,7 +113,11 @@ async function loadPage() {
         addTaskBox(taskbox);
     });
     
-    syncTaskBoxesSort()
+    
+    loadTasks(taskBoxes)
+    
+   
+    
     
 }
 
