@@ -9,9 +9,9 @@ function createNewTask(title, curr, box) {
         });
     });
 }
+  
 
-
-function forceCurrent(event) {
+function forceCurrent( event ) {
     let parentTask = event.target.parentNode.parentNode
     attachTask(parentTask, document.getElementById("current-task-block"))
 }

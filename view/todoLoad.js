@@ -6,7 +6,6 @@ function getCurrentTaskHtml(prefix, text) {
         <p class="txt taskcat">${prefix}</p>
         <p class="txt">${text}</p>
         <div class="task_acts">
-            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
             <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)"/>
         </div>
     `;
@@ -15,14 +14,13 @@ function getCurrentTaskHtml(prefix, text) {
 function getBoxedTaskHtml(text) {
     return `
         <p class="txt">${text}</p>
-        <div class="task_acts">
-            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
+        <div class="task_acts">  
             <img class="circle_image_button" src="./assets/left.png" width="16" onclick="forceCurrent(event)"/>
             <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)"/>
         </div>
     `;
 }
-
+//<img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)"/>
 
 
 function addTaskBox(taskbox) {
@@ -65,37 +63,50 @@ function addTask(taskdata, boxid, init) {
         task.classList.add('taskcomplete')
     }
 
-    if (taskdata.current || boxid == 0) {
-        // console.log(document.getElementById("current-task-block").querySelector('.task_block_list'));
-        attachTask(task, document.getElementById("current-task-block"), init)
-    } else {
-        attachTask(task, document.getElementById("taskbox" + boxid), init)
-    }
+    // if (taskdata.current || boxid == 0) {
+       
+    // } else {
+    // console.log(document.getElementById("taskbox" + boxid));
+        attachTask( task, document.getElementById("taskbox" + boxid), true )
+   // }
 
     
 }
 
 function loadTasks(boxes){
-
-    globalThis.tasksDataController.tasksByBlock( 0 ).then((res) => {
     
+    // let bi = null;
+    // let boxid = 0;
+    // do {  
+    //     // console
+    //     if (bi != null) {boxid = boxes[bi].id} else { bi = 0 }  
         
-        res.sort(function(a, b) { 
-            return a.sortId - b.sortId;
-        });
-
-        for (var i = 0; i < res.length; ++i) {
-            let taskdata = res[i];
-            console.log(taskdata.sortId);
-            addTask(taskdata, taskdata.taskBoxId, true)
-        }
-        // res.forEach((taskdata) => {
+    //     globalThis.tasksDataController.tasksByBlock( boxid ).then((res) => {
             
-        //     addTask(taskdata, taskdata.taskBoxId, true)
-        // });
+            
+            
+    //         res.sort(function(a, b) { 
+    //             return a.sortId - b.sortId;
+    //         });
+
+    //         for (var i = 0; i < res.length; ++i) {
+    //             let taskdata = res[i];
+    //             // console.log(taskdata.text);
+    //             addTask(taskdata, taskdata.taskBoxId, true)
+    //         }
+    //         // res.forEach((taskdata) => {
+                
+    //         //     addTask(taskdata, taskdata.taskBoxId, true)
+    //         // });
+            
+            
+    //     });
+
+
+    // } while (bi < boxes.length);
         
         
-    });
+
 }
 
 
