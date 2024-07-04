@@ -28,7 +28,7 @@ function checkTask(event) {
             
             taskData.done = false;
             parentTask.classList.remove('taskcomplete')
-            console.log(taskData.current)
+            
             globalThis.tasksDataController.updateTask(taskData).then(() => {
                 
             });

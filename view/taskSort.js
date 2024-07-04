@@ -106,9 +106,9 @@ function attachTask( task, target, isload ) {
 
 function dragTask(event) {
     // Adding dragging class to task after a delay
-    if (event.target.classList.contains("task")) {
+    // if (event.target.classList.contains("task")) {
         setTimeout(() => event.target.classList.add("dragging"), 0);
-    }
+    // }
 }
 
 function dragendTask(event) {
@@ -179,7 +179,8 @@ function dragOverTasklist(event) {
     });
 
     // let taskbox = (event.target.closest(".task-block"))
-
+    if (!draggingtask.classList.contains("task")) return;
+  
     if (nextSibling) {
 
         event.target.insertBefore(draggingtask, nextSibling);
