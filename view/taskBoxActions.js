@@ -17,12 +17,12 @@ function createTaskBox(event) {
 
 
 function removeTaskBox(event) {
-    let parentTask = event.target.parentNode.parentNode
-    let taskBoxId = parentTask.id.slice(7, 8)
+    let parentTaskbox = event.target.parentNode.parentNode.parentNode.parentNode
+    let taskBoxId = parentTaskbox.id.slice(7, 8)
 
     globalThis.tasksDataController.removeTasksByBox(taskBoxId).then(() => {
         globalThis.tasksDataController.removeTaskBox(taskBoxId).then(() => {
-            parentTask.remove();
+            parentTaskbox.remove();
         });
     });
 

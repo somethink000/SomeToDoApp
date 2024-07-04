@@ -44,7 +44,7 @@ function attachTask( task, target, isload ) {
         
     if (targ = target.querySelector('.task_block_list')) {
 
-        //attaching task after validate & before task features for correct sorteing
+        //attaching task after validate & before task features for correct sort
         targ.appendChild(task);
 
         globalThis.tasksDataController.getTask(task.id).then((response) => {
@@ -54,18 +54,18 @@ function attachTask( task, target, isload ) {
             if (target.id.slice(7, 8) > 0) {
 
                 if (taskData.current) {
-
+                    
                     taskData.current = false;
                     task.innerHTML = getBoxedTaskHtml(taskData.text);
                 }
-                let taskboxid = targ.id.slice(7, 8);
+                let taskboxid = target.id.slice(7, 8);
                 if (taskData.taskBoxId != taskboxid) {
                     taskData.taskBoxId = taskboxid;
                 }
                 
             } else {
                 taskData.current = true;
-
+                
                 if (taskData.taskBoxId != 0) {
                     if (taskData.done) {
                         taskData.done = false;
@@ -81,11 +81,15 @@ function attachTask( task, target, isload ) {
                     task.innerHTML = getCurrentTaskHtml(" ", taskData.text);
                 }
             }
-
+            
             // globalThis.tasksDataController.updateTask(taskData).then(() => {
                 if (targ && !isload) {
                     
                     syncTasksSort(task);
+                    
+                    globalThis.tasksDataController.updateTask(taskData).then((res) => {
+                        console.log(taskData)
+                    });
                 }
             // });
 
@@ -102,11 +106,13 @@ function attachTask( task, target, isload ) {
 
 function dragTask(event) {
     // Adding dragging class to task after a delay
-    setTimeout(() => event.target.classList.add("dragging"), 0);
+    if (event.target.classList.contains("task")) {
+        setTimeout(() => event.target.classList.add("dragging"), 0);
+    }
 }
 
 function dragendTask(event) {
-
+    
     let taskList;
     let task = event.target;
 
@@ -160,6 +166,7 @@ function dragendTask(event) {
 }
 
 function dragOverTasklist(event) {
+
     event.preventDefault();
     const draggingtask = document.querySelector(".dragging");
     // Getting all tasks except currently dragging and making array of them

@@ -13,24 +13,24 @@ function createNewTask(title, curr, box) {
 
 function forceCurrent( event ) {
     let parentTask = event.target.parentNode.parentNode
-    attachTask(parentTask, document.getElementById("current-task-block"))
+    attachTask(parentTask, document.getElementById("taskbox0"), false)
 }
 
 
 function checkTask(event) {
     let parentTask = event.target.parentNode.parentNode
-
+    
     globalThis.tasksDataController.getTask(parentTask.id).then((response) => {
 
         let taskData = response[0];
 
         if (taskData.done) {
-
+            
             taskData.done = false;
             parentTask.classList.remove('taskcomplete')
-
+            console.log(taskData.current)
             globalThis.tasksDataController.updateTask(taskData).then(() => {
-
+                
             });
 
         } else {
@@ -40,15 +40,16 @@ function checkTask(event) {
 
             globalThis.tasksDataController.updateTask(taskData).then(() => {
 
+                if (taskData.current) {
+                    
+                    if (taskData.taskBoxId != 0) {
+                        attachTask(parentTask, document.getElementById("taskbox" + taskData.taskBoxId), false)
+                    }
+                }
+
             });
 
-            if (taskData.current) {
-
-                if (taskData.taskBoxId != 0) {
-                    attachTask(parentTask, document.getElementById("taskbox" + taskData.taskBoxId))
-                    // document.getElementById("taskbox"+taskData.taskBoxId).appendChild(parentTask);
-                }
-            }
+            
         }
 
     });
