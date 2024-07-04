@@ -6,7 +6,7 @@ function getCurrentTaskHtml(prefix, text) {
         <p class="txt taskcat">${prefix}</p>
         <p class="txt">${text}</p>
         <div class="task_acts">
-            <img class="circle_image_button" src="./assets/trash.png" width="16" onclick="removeTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
+            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
             <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
         </div>
     `;
@@ -16,7 +16,7 @@ function getBoxedTaskHtml(text) {
     return `
         <p class="txt">${text}</p>
         <div class="task_acts">  
-            <img class="circle_image_button" src="./assets/trash.png" width="16" onclick="removeTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
+            <img class="circle_image_button" src="./assets/cross.png" width="16" onclick="removeTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
             <img class="circle_image_button" src="./assets/left.png" width="16" onclick="forceCurrent(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
             <img class="circle_image_button" src="./assets/check.png" width="16" onclick="checkTask(event)" ondragstart="event.preventDefault(); event.stopPropagation();"/>
         </div>

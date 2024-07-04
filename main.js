@@ -42,6 +42,7 @@ const createWindow = () => {
     title: "TaskToDo",
     vibrancy: 'fullscreen-ui',
     backgroundMaterial: 'acrylic',
+    icon:path.join( __dirname, '/view/assets/appicon.png' ),
     webPreferences: {
       preload: path.join(__dirname, '/preload.js')
     }
