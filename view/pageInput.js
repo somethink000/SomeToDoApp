@@ -1,42 +1,5 @@
 
 
-// function allowDrop(ev) {
-//     ev.preventDefault();
-// }
-
-// function drag(ev) {
-//     ev.dataTransfer.setData("text", ev.target.id);
-// }
-
-// function drop(ev) {
-
-//     var dragiable = document.getElementById(ev.dataTransfer.getData("text"));
-
-//     if (dragiable.classList.contains("task-block")) {
-           
-//     }else{
-//         attachTask( dragiable, ev.target )
-//         console.log(dragiable);
-//     }
-// }
-
-
-
-var input = document.getElementById("forceTask");
-
-
-input.addEventListener("keypress", function(event) {
-  
-  if (event.key === "Enter") {
-    
-    event.preventDefault();
-    
-    createNewTask(input.value, true, 0)
-    input.value = "";
-  }
-});
-
-
 
 function createTaskBoxWindow(event) {
     // const tasks_place = document.getElementById('tasks_place')

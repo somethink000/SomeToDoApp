@@ -43,6 +43,7 @@ function addTaskBox(taskbox) {
 
                 <div class="dropdown-content">
                     <a href="#" onclick="removeTaskBox(event)">Delete</a>
+                    <a href="#" onclick="createTaskWindow(event)">NewTask</a>
                 </div>
             </div>
 
